@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Delhi Policy Dashboard</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<style>
+body { font-family: Arial, sans-serif; background:#f0f2f5; margin:0; padding:0; }
+.dashboard-container { max-width:1200px; margin:20px auto; padding:20px; }
+h2 { text-align:center; color:#333; }
+.stats-container { display:flex; justify-content:space-between; flex-wrap:wrap; gap:15px; margin:20px 0; }
+.stat-box { flex:1; min-width:180px; background:#fff; padding:15px; border-radius:8px; box-shadow:0 2px 8px rgba(0,0,0,0.05); text-align:center; }
+.stat-box h3 { margin:10px 0; color:#007bff; }
+.chart-container, .product-section, .policy-section { margin-top:30px; background:#fff; padding:20px; border-radius:8px; box-shadow:0 2px 10px rgba(0,0,0,0.05); }
+canvas { max-width:100%; height:400px; }
+.policy-list, .product-list { list-style:none; padding-left:0; }
+.policy-list li, .product-list li { margin-bottom:10px; padding:10px; border-bottom:1px solid #eee; }
+</style>
+</head>
+<body>
+<div class="dashboard-container">
+<nav class="navbar navbar-expand-lg navbar-dark" style="background-color: crimson; position: sticky; top: 0; z-index: 1000;">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="/">Delhi AQI Dashboard</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item mx-1">
+          <a class="btn btn-light btn-sm" href="/signup">Signup</a>
+        </li>
+        <li class="nav-item mx-1">
+          <a class="btn btn-light btn-sm" href="/login">Login</a>
+        </li>
+        <li class="nav-item mx-1">
+          <a class="btn btn-light btn-sm" href="/register">Register</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div class="stats-container">
+  <div class="stat-box"><h3>Total Active Users</h3><p><%= statsSummary.totalUsers %></p></div>
+  <div class="stat-box"><h3>Companies Linked</h3><p><%= statsSummary.totalCompanies %></p></div>
+  <div class="stat-box"><h3>Active Policies</h3><p><%= statsSummary.activePolicies %></p></div>
+</div>
+
+<div class="policy-section">
+<h3>Policies & Protocols</h3>
+<ul class="policy-list">
+  <% policies.forEach(p => { %>
+    <li><strong><%= p.name %></strong> - <%= p.implemented ? "Implemented ✅" : "Not Implemented ❌" %></li>
+  <% }) %>
+</ul>
+</div>
+
+<div class="chart-container">
+<h3>Hourly Emission Levels Comparison</h3>
+<canvas id="emissionChart"></canvas>
+</div>
+
+<div class="product-section">
+<h3>Products / Initiatives</h3>
+<ul class="product-list">
+  <% products.forEach(prod => { %>
+    <li><strong><%= prod.name %></strong>: <%= prod.desc %></li>
+  <% }) %>
+</ul>
+</div>
+</div>
+
+<script>
+// ===== Dynamic Emission Simulation =====
+const policies = <%- JSON.stringify(policies) %>;
+const hours = Array.from({length:24},(_,i)=>i+":00");
+const emissionsWithPolicy = [];
+const emissionsWithoutPolicy = [];
+let baseEmission = 100;
+
+hours.forEach((h,i)=>{
+  const implementedCount = policies.filter(p=>p.implemented).length;
+  const notImplementedCount = policies.filter(p=>!p.implemented).length;
+  const reductionFactor = implementedCount / policies.length;
+  const increaseFactor = notImplementedCount / policies.length;
+
+  let withPolicy = baseEmission * (1 - 0.2 * reductionFactor) + Math.random()*10;
+  emissionsWithPolicy.push(Math.round(withPolicy));
+
+  let withoutPolicy = baseEmission * (1 + 0.2 * increaseFactor) + Math.random()*10;
+  emissionsWithoutPolicy.push(Math.round(withoutPolicy));
+
+  baseEmission += 2; // increase over day
+});
+
+// ===== Chart.js =====
+const ctx = document.getElementById('emissionChart').getContext('2d');
+new Chart(ctx,{
+  type:'line',
+  data:{
+    labels: hours,
+    datasets:[
+      { label:'With Policy', data:emissionsWithPolicy, borderColor:'green', fill:false, tension:0.3 },
+      { label:'Without Policy', data:emissionsWithoutPolicy, borderColor:'red', fill:false, tension:0.3 }
+    ]
+  },
+  options:{
+    responsive:true,
+    plugins:{ legend:{position:'top'}, title:{display:true,text:'Hourly Emission Levels'} },
+    scales:{ y:{ title:{display:true,text:'Emission Level (μg/m³)'} }, x:{ title:{display:true,text:'Hour of Day'} } }
+  }
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,72 @@
+<% layout("/layout/boilerplate") -%>
+
+<div class="container mt-5 mb-5">
+
+  <!-- ✅ Flash Messages -->
+  <% if (success && success.length > 0) { %>
+    <div class="alert alert-success alert-dismissible fade show text-center" role="alert">
+      <%= success %>
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+  <% } %>
+
+  <% if (error && error.length > 0) { %>
+    <div class="alert alert-danger alert-dismissible fade show text-center" role="alert">
+      <%= error %>
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+  <% } %>
+
+  <!-- 🔒 Register Section -->
+  <div class="row align-items-center justify-content-center px-3" style="padding-top: 80px;">
+
+    <!-- 👤 Left Form -->
+    <div class="col-md-6">
+      <form action="/listings/register" method="POST" class="p-4 shadow rounded-4 bg-white" style="max-width: 480px; margin: auto;">
+        
+        <div class="text-center mb-4">
+          <i class="fa-solid fa-circle-user fa-4x text-danger"></i>
+        </div>
+
+        <h2 class="text-center fw-bold mb-4">Create Account</h2>
+
+        <div class="mb-3">
+          <label for="username" class="form-label fw-bold"><i class="fa-solid fa-user me-2"></i>Username</label>
+          <input type="text" name="username" id="username" class="form-control form-control-lg" placeholder="Enter your username" required>
+        </div>
+
+        <div class="mb-3">
+          <label for="email" class="form-label fw-bold"><i class="fa-solid fa-envelope me-2"></i>Email</label>
+          <input type="email" name="email" id="email" class="form-control form-control-lg" placeholder="Enter your email" required>
+        </div>
+
+        <div class="mb-4">
+          <label for="password" class="form-label fw-bold"><i class="fa-solid fa-lock me-2"></i>Password</label>
+          <input type="password" name="password" id="password" class="form-control form-control-lg" placeholder="Enter your password" required>
+        </div>
+
+        <div class="d-grid">
+          <button type="submit" class="btn btn-danger btn-lg">
+            <i class="fa-solid fa-user-plus me-2"></i>Register
+          </button>
+        </div>
+
+        <div class="text-center mt-3">
+          Already a member? <a href="/listings/login">Login here</a>
+        </div>
+
+      </form>
+    </div>
+
+    <!-- 🖼️ Right Image -->
+    <div class="col-md-6 text-center mt-4 mt-md-0">
+      <img 
+        src="https://www.creativefabrica.com/wp-content/uploads/2023/05/11/Torist-world-travel-cartoon-concept-with-Graphics-69390779-1.png" 
+        alt="Travel Illustration"
+        class="img-fluid shadow-sm rounded-4"
+        style="max-height: 460px;"
+      />
+    </div>
+
+  </div>
+</div>

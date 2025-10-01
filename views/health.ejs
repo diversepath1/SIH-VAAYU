@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Health Advisory</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f0f2f5;
+      margin: 0;
+      padding: 0;
+    }
+
+    .health-widget {
+      max-width: 600px;
+      margin: 30px auto;
+      padding: 20px;
+      border-radius: 12px;
+      background: #f8f9fa;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+
+    h2, h3 {
+      text-align: center;
+      color: #333;
+    }
+
+    .hw-form {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    .hw-form label {
+      font-weight: bold;
+    }
+
+    .hw-form input[type="number"] {
+      padding: 6px 10px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    .hw-checkboxes {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .hw-checkboxes label {
+      font-weight: normal;
+    }
+
+    #hw-update-btn {
+      padding: 10px;
+      border: none;
+      border-radius: 6px;
+      background-color: #007bff;
+      color: #fff;
+      cursor: pointer;
+      font-size: 16px;
+      margin-top: 10px;
+    }
+
+    #hw-update-btn:hover {
+      background-color: #0056b3;
+    }
+
+    .hw-output {
+      margin-top: 20px;
+      padding: 15px;
+      border-radius: 8px;
+      background: #eef3f7;
+    }
+
+    .hw-output div {
+      margin-bottom: 10px;
+      font-weight: bold;
+      color: #444;
+    }
+
+    .pollutant-panel {
+      margin-top: 25px;
+      padding: 15px;
+      border-radius: 8px;
+      background: #fff;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    }
+
+    .pollutant-panel ul {
+      list-style: none;
+      padding-left: 0;
+    }
+
+    .pollutant-panel li {
+      margin-bottom: 8px;
+    }
+
+    .pollutant-panel strong {
+      color: #007bff;
+    }
+  </style>
+</head>
+<body>
+  <div id="health-widget" class="health-widget">
+    <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: crimson; position: sticky; top: 0; z-index: 1000;">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="/">Delhi AQI Dashboard</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item mx-1">
+          <a class="btn btn-light btn-sm" href="/signup">Signup</a>
+        </li>
+        <li class="nav-item mx-1">
+          <a class="btn btn-light btn-sm" href="/login">Login</a>
+        </li>
+        <li class="nav-item mx-1">
+          <a class="btn btn-light btn-sm" href="/register">Register</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <!-- User inputs -->
+    <div class="hw-form">
+      <label for="hw-age">Age</label>
+      <input id="hw-age" type="number" min="0" max="130" value="28">
+
+      <label>Pre-existing Conditions</label>
+      <div class="hw-checkboxes">
+        <label><input type="checkbox" value="asthma"> Asthma</label>
+        <label><input type="checkbox" value="heart"> Heart Disease</label>
+        <label><input type="checkbox" value="diabetes"> Diabetes</label>
+        <label><input type="checkbox" value="none"> None</label>
+      </div>
+
+      <button id="hw-update-btn" type="button">Update</button>
+    </div>
+
+    <!-- Output -->
+    <div class="hw-output">
+      <div id="hw-aqi-display"></div>
+      <div id="hw-warning"></div>
+      <div id="hw-personalized"></div>
+      <div id="hw-actions"></div>
+    </div>
+
+    <!-- Pollutant effects -->
+    <div class="pollutant-panel">
+      <h3>Pollutant Effects on Human Body</h3>
+      <ul>
+        <li><strong>PM2.5:</strong> Lung & heart issues, asthma trigger.</li>
+        <li><strong>PM10:</strong> Irritates throat & eyes.</li>
+        <li><strong>NO₂:</strong> Respiratory irritation.</li>
+        <li><strong>SO₂:</strong> Throat irritation, asthma attacks.</li>
+        <li><strong>O₃:</strong> Chest pain, cough, worsens asthma.</li>
+        <li><strong>CO:</strong> Reduces oxygen, causes dizziness.</li>
+      </ul>
+    </div>
+  </div>
+
+  <script src="/public/js/health.js"></script>
+</body>
+</html>

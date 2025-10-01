@@ -1,0 +1,105 @@
+/* ===== Health Widget Container ===== */
+.health-widget {
+  max-width: 600px;
+  margin: 30px auto;
+  padding: 20px;
+  border-radius: 12px;
+  background: #ffffff;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  font-family: Arial, sans-serif;
+}
+
+.health-widget h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #2c3e50;
+}
+
+/* ===== Form Styles ===== */
+.hw-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.hw-form label {
+  font-weight: bold;
+  margin-bottom: 4px;
+}
+
+.hw-form input[type="number"] {
+  padding: 8px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  width: 100px;
+}
+
+.hw-checkboxes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.hw-checkboxes label {
+  font-weight: normal;
+  cursor: pointer;
+}
+
+#hw-update-btn {
+  background: #3498db;
+  color: #fff;
+  border: none;
+  padding: 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  width: 120px;
+}
+
+#hw-update-btn:hover {
+  background: #2980b9;
+}
+
+/* ===== Output Styles ===== */
+.hw-output {
+  padding: 15px;
+  border-radius: 8px;
+  background: #f9f9f9;
+  margin-bottom: 20px;
+}
+
+.hw-output > div {
+  margin-bottom: 10px;
+  font-size: 15px;
+}
+
+/* ===== Pollutant Panel ===== */
+.pollutant-panel {
+  padding: 15px;
+  border-top: 2px solid #ddd;
+}
+
+.pollutant-panel h3 {
+  margin-bottom: 10px;
+  font-size: 16px;
+  color: #34495e;
+}
+
+.pollutant-panel ul {
+  padding-left: 20px;
+  list-style: disc;
+}
+
+.pollutant-panel li {
+  margin-bottom: 6px;
+  font-size: 14px;
+}
+
+/* ===== AQI Color Classes ===== */
+.aqi-good { color: green; font-weight: bold; }
+.aqi-moderate { color: #c0a000; font-weight: bold; }
+.aqi-usg { color: orange; font-weight: bold; }
+.aqi-unhealthy { color: red; font-weight: bold; }
+.aqi-veryunhealthy { color: purple; font-weight: bold; }
+.aqi-hazardous { color: maroon; font-weight: bold; }

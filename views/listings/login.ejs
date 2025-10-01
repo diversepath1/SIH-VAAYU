@@ -1,0 +1,81 @@
+<div class="container py-5">
+  <div class="row justify-content-center align-items-center">
+    <div class="col-lg-6 col-md-8">
+      <div class="card shadow-lg rounded-4 border-0">
+        <div class="card-body p-5">
+
+          <div class="text-center position-relative mb-4">
+            <svg width="300" height="100" viewBox="0 0 300 100" class="mx-auto d-block">
+              <path d="M 20 80 Q 150 0 280 80"
+                    stroke="gray"
+                    stroke-dasharray="5,5"
+                    fill="transparent"
+                    stroke-width="2"/>
+            </svg>
+            <i class="bi bi-send plane-glow"
+               style="position:absolute;top:35px;left:255px;font-size:3rem;color:crimson;transform:rotate(90deg);">
+            </i>
+          </div>
+
+          <h2 class="text-center mb-4 fw-bold text-crimson">Login</h2>
+
+          <form action="/listings/login" method="POST">
+            <!-- Username or Email -->
+            <div class="form-floating mb-3">
+              <input type="text" class="form-control" id="identifier" name="identifier" placeholder="Username or Email" required>
+              <label for="identifier">Username or Email</label>
+            </div>
+
+            <!-- Password -->
+            <div class="form-floating mb-3 position-relative">
+              <input type="password" class="form-control" id="password" name="password" placeholder="Password" required>
+              <label for="password">Password</label>
+              <button type="button" class="btn btn-sm btn-outline-dark position-absolute top-50 end-0 translate-middle-y me-2" onclick="togglePassword()">
+                Show
+              </button>
+            </div>
+
+            <div class="d-grid">
+              <button type="submit" class="btn btn-crimson btn-lg fw-bold">Login</button>
+            </div>
+          </form>
+
+          <p class="text-center mt-3 mb-0">
+            Don’t have an account? <a href="/listings/register" class="text-crimson fw-semibold">Register here</a>
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-lg-6 d-none d-lg-flex justify-content-center align-items-center">
+      <img src="https://thumbs.dreamstime.com/b/vector-illustration-famous-world-landmarks-travel-tourism-concept-flat-design-vector-illustration-famous-world-landmarks-334777912.jpg" 
+           alt="Wanderlust Image" class="img-fluid rounded-4 shadow-lg" style="max-height: 500px;">
+    </div>
+  </div>
+</div>
+
+<script>
+  function togglePassword() {
+    const passwordInput = document.getElementById("password");
+    const toggleButton = event.target;
+    if (passwordInput.type === "password") {
+      passwordInput.type = "text";
+      toggleButton.textContent = "Hide";
+    } else {
+      passwordInput.type = "password";
+      toggleButton.textContent = "Show";
+    }
+  }
+</script>
+
+<style>
+  :root { --crimson: #DC143C; }
+  .btn-crimson { background-color: var(--crimson); color: #fff; }
+  .btn-crimson:hover { background-color: #b01030; color: #fff; }
+  .text-crimson { color: var(--crimson); }
+  .plane-glow { filter: drop-shadow(2px 2px 6px var(--crimson)); }
+  .form-control:focus {
+    box-shadow: 0 0 0 0.2rem rgba(220,20,60,.25);
+    border-color: var(--crimson);
+  }
+</style>
